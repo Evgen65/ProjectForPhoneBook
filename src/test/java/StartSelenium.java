@@ -18,9 +18,7 @@ public class StartSelenium {
         wd = new ChromeDriver();
         wd.get("https://telranedu.web.app/");
 
-
     }
-
     @Test
     public void testName() {
         System.out.println("test started");
@@ -34,13 +32,7 @@ public class StartSelenium {
         WebElement root = wd.findElement(By.id("root"));
         System.out.println(root.getLocation());
 
-
-
-
-
-
     }
-
     @Test
     public void testLogin() {
         System.out.println("test complited");
@@ -48,13 +40,9 @@ public class StartSelenium {
         System.out.println(element.getLocation());
         WebElement wdElement = wd.findElement(By.cssSelector("[href='/about']"));
         System.out.println(wdElement.getCssValue("ABOUT"));
-        wd.findElement(By.)
-
 
 
     }
-
-
     @AfterMethod
     public void postCondition() {
       //  wd.close();
