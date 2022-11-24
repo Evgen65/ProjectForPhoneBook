@@ -30,7 +30,13 @@ public class StartSelenium {
         wd.findElement(By.linkText("HOME"));
         wd.findElement(By.partialLinkText("HO"));
         WebElement root = wd.findElement(By.id("root"));
-        System.out.println(root.getLocation());
+
+     //   wd.findElement(By.cssSelector("[href='/login']"));
+     //   wd.findElement(By.cssSelector("[href^='/lo']"));
+     //   wd.findElement(By.cssSelector("[href*='/og']"));
+      //  wd.findElement(By.cssSelector("[href$='/gin']"));
+        List<WebElement> button = wd.findElements(By.tagName("button"));
+
 
     }
     @Test
