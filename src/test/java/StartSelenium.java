@@ -2,6 +2,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -10,13 +11,13 @@ import javax.sound.sampled.AudioSystem;
 import java.sql.SQLOutput;
 import java.util.List;
 
-public class StartSelenium {
+public class StartSelenium extends TestBase {
     WebDriver wd;
 
     @BeforeMethod
     public void preCondition() {
         wd = new ChromeDriver();
-        wd.get("https://telranedu.web.app/");
+        wd.navigate().to("https://contacts-app.tobbymarshall815.vercel.app/");
 
     }
     @Test
@@ -39,11 +40,26 @@ public class StartSelenium {
     }
     @Test
     public void testLogin() {
-        System.out.println("test complited");
-        WebElement element = wd.findElement(By.tagName("a"));
-        System.out.println(element.getLocation());
-        WebElement wdElement = wd.findElement(By.cssSelector("[href='/about']"));
-        System.out.println(wdElement.getCssValue("ABOUT"));
+        //open login/reg form
+        WebElement loginBtn = wd.findElement(By.xpath("//a[text()='LOGIN']"));
+        loginBtn.click();
+        //fill login/reg form
+
+        WebElement emailInput = wd.findElement(By.xpath("//input[1]"));
+        emailInput.click();
+        emailInput.clear();
+        emailInput.sendKeys("abcd@mail.com");
+
+        WebElement passInput = wd.findElement(By.xpath("//input[2]"));
+        passInput.click();
+        passInput.clear();
+        passInput.sendKeys("Abcd1234S");
+
+        wd.findElement(By.xpath("//button[1]")).click();
+
+pause(3);
+       Assert.assertTrue( wd.findElement(By.xpath("//a[@href='/add']"))!= null);
+
 
 
     }
