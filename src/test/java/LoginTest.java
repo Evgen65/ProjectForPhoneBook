@@ -5,15 +5,12 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 public class LoginTest extends TestBase {
-//    WebDriver wd;
-//
    @BeforeMethod
     public void precondition(){
    if(isLogged()){
            logout();
      }
    }
-
     @Test
     public void testLoginPositive() {
        String email = "abcd@mail.com";
