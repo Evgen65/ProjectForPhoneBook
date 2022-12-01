@@ -2,17 +2,14 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.testng.annotations.AfterMethod;
 import org.testng.annotations.AfterSuite;
-import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeSuite;
 
 import java.util.concurrent.TimeUnit;
 
 public class TestBase {
     WebDriver wd;
-     public static String email;
-     public static String password;
+
 
     @BeforeSuite
     public void preCondition() {
@@ -27,11 +24,10 @@ public class TestBase {
     }
 
     public void pause(int time) {
-        // wd.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
         wd.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
     }
 
-    public void clic(By locator) {
+    public void click(By locator) {
         wd.findElement(locator).click();
     }
 
@@ -43,7 +39,7 @@ public class TestBase {
     }
 
     public void openLoginRegistration() {
-        clic(By.xpath("//a[text()='LOGIN']"));
+        click(By.xpath("//a[text()='LOGIN']"));
     }
 
     public void fillLoginRegistrationForm(String email, String password) {
@@ -53,11 +49,11 @@ public class TestBase {
     }
     //open login form
     public void submitLogin() {
-        clic(By.xpath("//button[1]"));
+        click(By.xpath("//button[1]"));
     }
     //open reg form
     public void submitRegistration() {
-        clic(By.xpath("//button[2]"));
+        click(By.xpath("//button[2]"));
 
     }
 
@@ -69,8 +65,7 @@ public class TestBase {
     }
     void logout() {
         WebElement signOut = wd.findElement(By.xpath("//button[text='Sign Out']"));
-        if(signOut.getText().equals("Sign Out"))
-        signOut.click();
+              signOut.click();
     }
 }
 
