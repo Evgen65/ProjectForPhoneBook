@@ -6,8 +6,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 public class Registration extends TestBase {
-  //  public static String email;
-  //  public static String password;
+
 
     //    WebDriver wd;
 
@@ -18,14 +17,11 @@ public class Registration extends TestBase {
        }
    }
 
-
-
-
     @Test
     public void testRegistrationPositive() {
         int i = (int) (System.currentTimeMillis() / 1000) % 3600;
         String email = "name" + i + "@mail.com";
-        String password = "Abcd1234S";
+        String password = "Abcd1234$";
 
         openLoginRegistration();
         fillLoginRegistrationForm(email, password);
@@ -39,9 +35,8 @@ public class Registration extends TestBase {
     public void registrationWrongEmail() {
         int i = (int) (System.currentTimeMillis() / 1000) % 3600;
         String email = "name" + i + "mail.com";
-        String password = "Abcd1234S";
+        String password = "Abcd1234$";
     }
-
 
     @AfterMethod
     public void postCondition() {

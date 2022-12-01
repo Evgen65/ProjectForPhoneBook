@@ -11,28 +11,25 @@ import java.util.concurrent.TimeUnit;
 
 public class TestBase {
     WebDriver wd;
+     public static String email;
+     public static String password;
 
     @BeforeSuite
     public void preCondition() {
         wd = new ChromeDriver();
         wd.navigate().to("https://telranedu.web.app/");
-
-
     }
-
 
     @AfterSuite
     public void tearDown() {
         //  wd.close();
         //  wd.quit();
-
     }
 
     public void pause(int time) {
         // wd.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
         wd.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
     }
-
 
     public void clic(By locator) {
         wd.findElement(locator).click();
@@ -43,7 +40,6 @@ public class TestBase {
         element.click();
         element.clear();
         element.sendKeys(text);
-
     }
 
     public void openLoginRegistration() {
@@ -54,13 +50,12 @@ public class TestBase {
         type(By.xpath("//input[1]"), email);
         type(By.xpath("//input[2]"), password);
 
-
     }
-
+    //open login form
     public void submitLogin() {
         clic(By.xpath("//button[1]"));
     }
-
+    //open reg form
     public void submitRegistration() {
         clic(By.xpath("//button[2]"));
 
@@ -69,11 +64,8 @@ public class TestBase {
     public boolean isElementPresent(By locator) {
         return wd.findElements(locator).size() > 0;
 
-
-}
-    public boolean isLogged() {
-
-        return isElementPresent(By.xpath("//button[text='Sign Out']"));
+}    public boolean isLogged() {
+        return isElementPresent(By.xpath("locator"));
     }
     void logout() {
         WebElement signOut = wd.findElement(By.xpath("//button[text='Sign Out']"));
