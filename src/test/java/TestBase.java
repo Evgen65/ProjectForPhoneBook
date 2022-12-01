@@ -15,7 +15,7 @@ public class TestBase {
     @BeforeSuite
     public void preCondition() {
         wd = new ChromeDriver();
-        wd.navigate().to("https://contacts-app.tobbymarshall815.vercel.app/");
+        wd.navigate().to("https://telranedu.web.app/");
 
 
     }
@@ -27,8 +27,9 @@ public class TestBase {
         //  wd.quit();
 
     }
-    public void pause(int time){
-       // wd.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+
+    public void pause(int time) {
+        // wd.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
         wd.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
     }
 
@@ -64,12 +65,24 @@ public class TestBase {
         clic(By.xpath("//button[2]"));
 
     }
-    public boolean isElementPresent(By locator){
-        return wd.findElements(locator).size()>0;
-    }
-    public boolean isLogged()
 
-    {
-        return false;
+    public boolean isElementPresent(By locator) {
+        return wd.findElements(locator).size() > 0;
+
+
+}
+    public boolean isLogged() {
+
+        return isElementPresent(By.xpath("//button[text='Sign Out']"));
+    }
+    void logout() {
+        WebElement signOut = wd.findElement(By.xpath("//button[text='Sign Out']"));
+        if(signOut.getText().equals("Sign Out"))
+        signOut.click();
     }
 }
+
+
+
+
+

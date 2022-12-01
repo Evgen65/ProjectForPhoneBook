@@ -1,12 +1,13 @@
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 public class Registration extends TestBase {
+  //  public static String email;
+  //  public static String password;
 
     //    WebDriver wd;
 
@@ -17,11 +18,8 @@ public class Registration extends TestBase {
        }
    }
 
-    private void logout() {
-    }
 
 
-    // }
 
     @Test
     public void testRegistrationPositive() {
@@ -40,7 +38,7 @@ public class Registration extends TestBase {
     @Test
     public void registrationWrongEmail() {
         int i = (int) (System.currentTimeMillis() / 1000) % 3600;
-        String email = "name" + i + "@mail.com";
+        String email = "name" + i + "mail.com";
         String password = "Abcd1234S";
     }
 
