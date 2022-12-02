@@ -1,11 +1,8 @@
 package manager;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-
 import java.util.concurrent.TimeUnit;
-
 public class HelperBase {
     public WebDriver wd;
 
@@ -14,7 +11,6 @@ public class HelperBase {
     }
     public boolean isElementPresent(By locator) {
             return wd.findElements(locator).size() > 0;
-
         }
     public void type(By locator, String text) {
             WebElement element = wd.findElement(locator);

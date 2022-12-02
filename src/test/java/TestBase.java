@@ -1,18 +1,12 @@
 import manager.ApplicationManager;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
-
-import java.util.concurrent.TimeUnit;
 
 
 
     public class TestBase {
-       // WebDriver wd;
-     public static ApplicationManager app=new ApplicationManager();
+        // WebDriver wd;
+        public static ApplicationManager app = new ApplicationManager();
 
         @BeforeSuite
         public void setUp() {
@@ -21,7 +15,7 @@ import java.util.concurrent.TimeUnit;
 
         @AfterSuite
         public void tearDown() {
-           app.stop();
+            app.stop();
         }
 
 //        public void pause(int time) {
@@ -55,12 +49,12 @@ import java.util.concurrent.TimeUnit;
 //        public void submitRegistration() {
 //            click(By.xpath("//button[2]"));
 
-        }
+        //       }
 
 //        public boolean isElementPresent(By locator) {
 //            return wd.findElements(locator).size() > 0;
 //
-  //     }
+        //     }
 //       public boolean isLogged() {
 //
 //            return isElementPresent(By.xpath("l//button[text='Sign Out']"));
@@ -69,4 +63,5 @@ import java.util.concurrent.TimeUnit;
 //           // WebElement signOut = wd.findElement(By.xpath("//button[text='Sign Out']"));
 //            click(By.xpath("//button[text='Sign Out']"));
 //        }
+    }
 

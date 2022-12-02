@@ -10,7 +10,7 @@ import org.testng.annotations.Test;
         //    WebDriver wd;
 
         @ BeforeMethod
-        public void precondition(){
+        public void preCondition(){
             if(app.getUser().isLogged()){
                app.getUser().logout();
             }
@@ -26,7 +26,7 @@ import org.testng.annotations.Test;
             app.getUser().submitRegistration();
             app.getUser().pause(3);
 
-            Assert.assertTrue(app.getUser().isElementPresent(By.xpath("//button")));
+
 
         }
 
@@ -35,6 +35,12 @@ import org.testng.annotations.Test;
             int i = (int) (System.currentTimeMillis() / 1000) % 3600;
             String email = "name" + i + "mail.com";
             String password = "Abcd1234$";
+
+            app.getUser().openLoginRegistrationForm();
+            app.getUser().fillLoginRegistrationForm(email, password);
+            app.getUser().submitRegistration();
+            app.getUser().pause(3);
+            Assert.assertFalse(app.getUser().isElementPresent(By.xpath("//button")));
 
         }
 

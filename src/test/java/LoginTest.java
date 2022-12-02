@@ -1,5 +1,4 @@
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
@@ -20,8 +19,7 @@ public class LoginTest extends TestBase {
   public void testLoginPositive() {
    String email = "abcd@mail.com";
    String password = "Abcd1234$";
-   // email=Registration.email;
-   //  password=Registration.password;
+
       app.getUser().openLoginRegistrationForm();
       app.getUser().fillLoginRegistrationForm(email, password);
       app.getUser().submitLogin();
