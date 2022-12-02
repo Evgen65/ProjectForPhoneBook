@@ -11,8 +11,8 @@ import org.testng.annotations.Test;
 
         @ BeforeMethod
         public void precondition(){
-            if(isLogged()){
-                logout();
+            if(app.getUser().isLogged()){
+               app.getUser().logout();
             }
         }
 
@@ -21,12 +21,12 @@ import org.testng.annotations.Test;
             int i = (int) (System.currentTimeMillis() / 1000) % 3600;
             String email = "name" + i + "@mail.com";
             String password = "Abcd1234$";
+            app.getUser().openLoginRegistrationForm();
+            app.getUser().fillLoginRegistrationForm(email, password);
+            app.getUser().submitRegistration();
+            app.getUser().pause(3);
 
-            openLoginRegistration();
-            fillLoginRegistrationForm(email, password);
-            submitRegistration();
-            pause(5);
-            Assert.assertTrue(isElementPresent(By.xpath("//button")));
+            Assert.assertTrue(app.getUser().isElementPresent(By.xpath("//button")));
 
         }
 
@@ -35,7 +35,9 @@ import org.testng.annotations.Test;
             int i = (int) (System.currentTimeMillis() / 1000) % 3600;
             String email = "name" + i + "mail.com";
             String password = "Abcd1234$";
+
         }
+
 
         @AfterMethod
         public void postCondition() {

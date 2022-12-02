@@ -1,4 +1,5 @@
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
@@ -6,10 +7,11 @@ import org.testng.annotations.Test;
 
 public class LoginTest extends TestBase {
 
+
   @BeforeMethod
   public void precondition(){
-   if(isLogged()){
-    logout();
+   if(app.getUser().isLogged()){
+       app.getUser().logout();
 
    }
   }
@@ -20,12 +22,12 @@ public class LoginTest extends TestBase {
    String password = "Abcd1234$";
    // email=Registration.email;
    //  password=Registration.password;
+      app.getUser().openLoginRegistrationForm();
+      app.getUser().fillLoginRegistrationForm(email, password);
+      app.getUser().submitLogin();
+      app.getUser().pause(3);
 
-   openLoginRegistration();
-   fillLoginRegistrationForm(email, password);
-   submitLogin();
-   pause(10);
-   Assert.assertNotNull(wd.findElement(By.xpath("//a[@href='/add']")));
+      Assert.assertTrue(app.getUser().isElementPresent(By.xpath("//a[@href='/add']")));
   }
   @AfterMethod
   public void tearDown() {
