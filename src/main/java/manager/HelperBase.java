@@ -5,7 +5,6 @@ import org.openqa.selenium.WebElement;
 import java.util.concurrent.TimeUnit;
 public class HelperBase {
     public WebDriver wd;
-
     public HelperBase(WebDriver wd) {
         this.wd = wd;
     }

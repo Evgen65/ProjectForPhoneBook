@@ -13,15 +13,15 @@ public class LoginTest<T> extends TestBase {
 
   @Test
   public void testLoginPositive() {
-//   String email = "abcd@mail.com";
-//   String password = "Abcd1234$";
-//
-//      app.getUser().openLoginRegistrationForm();
-//      app.getUser().fillLoginRegistrationForm(email, password);
-//      app.getUser().submitLogin();
-//      app.getUser().pause(3);
-//      Assert.assertTrue(app.getUser().isElementPresent(By.xpath("//a[@href='/add']")));
-      app.getUser().testLoginPositive();
+   String email = "abcd@mail.com";
+   String password = "Abcd1234$";
+
+      app.getUser().openLoginRegistrationForm();
+      app.getUser().fillLoginRegistrationForm(email, password);
+      app.getUser().submitLogin();
+      app.getUser().pause(3);
+      Assert.assertTrue(app.getUser().isElementPresent(By.xpath("//a[@href='/add']")));
+     // app.getUser().testLoginPositive();
   }
   @AfterMethod
   public void tearDown() {

@@ -1,8 +1,6 @@
 package manager;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.testng.Assert;
 
 public class HelperUser extends HelperBase {
     public HelperUser(WebDriver wd) {
@@ -54,7 +52,7 @@ public class HelperUser extends HelperBase {
         type(By.xpath("//input[2]"), password);
 
     }
-    public void fillContactsForm(String name, String lastName, String contEmail, String phoneNumber, String address, String description){
+    public void fillContactsForm(String name, String lastName,  String phoneNumber,String contEmail, String address, String description){
         type(By.xpath("//input[@placeholder='Name']"), name);
         type(By.xpath("//input[@placeholder='Last Name']"), lastName);
         type(By.xpath("//input[@placeholder='Phone']"), phoneNumber);
@@ -62,16 +60,7 @@ public class HelperUser extends HelperBase {
         type(By.xpath("//input[@placeholder='Address']"), address);
         type(By.xpath("//input[@placeholder='description']"), description);
     }
-    public void testLoginPositive() {
-        String email = "abcd@mail.com";
-        String password = "Abcd1234$";
 
-        openLoginRegistrationForm();
-        fillLoginRegistrationForm(email, password);
-        submitLogin();
-        pause(3);
-        Assert.assertTrue(isElementPresent(By.xpath("//a[@href='/add']")));
-    }
     public void beLogOut(){
         if(isLogged()){
             logout();
