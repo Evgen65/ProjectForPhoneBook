@@ -11,9 +11,7 @@ import org.testng.annotations.Test;
 
         @ BeforeMethod
         public void preCondition(){
-            if(app.getUser().isLogged()){
-               app.getUser().logout();
-            }
+            app.getUser().beLogOut();
         }
 
         @Test
@@ -25,9 +23,7 @@ import org.testng.annotations.Test;
             app.getUser().fillLoginRegistrationForm(email, password);
             app.getUser().submitRegistration();
             app.getUser().pause(3);
-
-
-
+            Assert.assertTrue(app.getUser().isElementPresent(By.xpath("//button")));
         }
 
         @Test
@@ -41,10 +37,7 @@ import org.testng.annotations.Test;
             app.getUser().submitRegistration();
             app.getUser().pause(3);
             Assert.assertFalse(app.getUser().isElementPresent(By.xpath("//button")));
-
         }
-
-
         @AfterMethod
         public void postCondition() {
             //  wd.close();

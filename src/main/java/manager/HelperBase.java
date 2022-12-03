@@ -18,12 +18,15 @@ public class HelperBase {
             element.clear();
             element.sendKeys(text);
         }
-    public void click(By locator) {
+    public void click(By locator)
+    {
         wd.findElement(locator).click();
     }
     public void pause(int time) {
         wd.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
     }
+
+
 
 }
 
