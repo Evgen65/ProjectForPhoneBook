@@ -1,4 +1,5 @@
 package manager;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
@@ -18,13 +19,12 @@ public class HelperUser extends HelperBase {
 
     public boolean isLogged() {
 
-        return isElementPresent(By.xpath
-                ("//button[text='Sign Out']"));
+        return isElementPresent(By.xpath("//button[text='Sign Out']"));
     }
+
     public boolean isNoLogged() {
-         isElementPresent(By.xpath
-                ("//button[text='Sign Out']"));
-         return false;
+        isElementPresent(By.xpath("//button[text='Sign Out']"));
+        return false;
     }
 
     public void logout() {
@@ -34,17 +34,16 @@ public class HelperUser extends HelperBase {
 
 
     public void openLoginRegistrationForm() {
-        click(By.xpath
-                ("//a[text()='LOGIN']"));
+        click(By.xpath("//a[text()='LOGIN']"));
     }
-    public void openAddContactsForm(){
-        click(By.xpath
-                ("//a[@href='/add']"));
+
+    public void openAddContactsForm() {
+        click(By.xpath("//a[@href='/add']"));
 
     }
-    public void saveAddContactsForm(){
-        click(By.xpath
-                ("(//button)[2]"));
+
+    public void saveAddContactsForm() {
+        click(By.xpath("(//button)[2]"));
     }
 
     public void fillLoginRegistrationForm(String email, String password) {
@@ -52,7 +51,8 @@ public class HelperUser extends HelperBase {
         type(By.xpath("//input[2]"), password);
 
     }
-    public void fillContactsForm(String name, String lastName,  String phoneNumber,String contEmail, String address, String description){
+
+    public void fillContactsForm(String name, String lastName, String phoneNumber, String contEmail, String address, String description) {
         type(By.xpath("//input[@placeholder='Name']"), name);
         type(By.xpath("//input[@placeholder='Last Name']"), lastName);
         type(By.xpath("//input[@placeholder='Phone']"), phoneNumber);
@@ -60,13 +60,22 @@ public class HelperUser extends HelperBase {
         type(By.xpath("//input[@placeholder='Address']"), address);
         type(By.xpath("//input[@placeholder='description']"), description);
     }
+    public void testLoginPositive() {
+        String email = "abcd@mail.com";
+        String password = "Abcd1234$";
 
-    public void beLogOut(){
-        if(isLogged()){
+        openLoginRegistrationForm();
+        fillLoginRegistrationForm(email, password);
+        submitLogin();
+        pause(3);
+    }
+
+    public void beLogOut() {
+        if (isLogged()) {
             logout();
         }
     }
-    }
+}
 
 
 

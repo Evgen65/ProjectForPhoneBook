@@ -3,20 +3,19 @@ import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
 
 
+public class TestBase {
+    // WebDriver wd;
+    public static ApplicationManager app = new ApplicationManager();
 
-    public class TestBase {
-        // WebDriver wd;
-        public static ApplicationManager app = new ApplicationManager();
+    @BeforeSuite
+    public void setUp() {
+        app.init();
+    }
 
-        @BeforeSuite
-        public void setUp() {
-            app.init();
-        }
-
-        @AfterSuite
-        public void tearDown() {
-            app.stop();
-        }
+    @AfterSuite
+    public void tearDown() {
+        app.stop();
+    }
 
 //        public void pause(int time) {
 //            wd.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
@@ -45,16 +44,16 @@ import org.testng.annotations.BeforeSuite;
 //        public void submitLogin() {
 //            click(By.xpath("//button[1]"));
 //        }
-        //open reg form
+    //open reg form
 //        public void submitRegistration() {
 //            click(By.xpath("//button[2]"));
 
-        //       }
+    //       }
 
 //        public boolean isElementPresent(By locator) {
 //            return wd.findElements(locator).size() > 0;
 //
-        //     }
+    //     }
 //       public boolean isLogged() {
 //
 //            return isElementPresent(By.xpath("l//button[text='Sign Out']"));
@@ -63,5 +62,5 @@ import org.testng.annotations.BeforeSuite;
 //           // WebElement signOut = wd.findElement(By.xpath("//button[text='Sign Out']"));
 //            click(By.xpath("//button[text='Sign Out']"));
 //        }
-    }
+}
 
