@@ -1,3 +1,4 @@
+import models.Contacts;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
@@ -18,17 +19,22 @@ public class AddContactsTest extends TestBase {
 
     @Test
     public void AddContactTestPositive() {
-        String name = "Tyron";
-        String lastName = "Lancaster";
-        String phoneNumber = "97251151175";
-        String contEmail = "name45@mail.com";
-        String address = "Royal Street 112 second floor Haifa";
-        String description = "We met on vacation a couple of years ago.";
-        app.getUser().openAddContactsForm();
-        app.getUser().fillContactsForm(name, lastName, phoneNumber, contEmail, address, description);
+        int i=(int)(System.currentTimeMillis()/1000)%360;
+        Contacts data=new Contacts()
+        .withName("Tyron"+i)
+                .withLastName("Lancaster"+i)
+                .withPhoneNumber("9725115117"+i)
+                .withContEmail("name"+i+"@mail.com")
+                .withAddress("Royal Street  Haifa"+i)
+                .withDescription("We met on vacation a couple of years ago.");
+
+               app.getUser().openAddContactsForm();
+        app.getUser().fillContactsForm("Tyron"+i, "Lancaster"+i, "name"+i+"@mail.com", "9725115117"+i, "Royal Street  Haifa"+i,"We met on vacation a couple of years ago.");
         app.getUser().saveAddContactsForm();
         app.getUser().pause(3);
-       // Assert.assertTrue(app.getUser().isElementPresent(By.xpath("//a[@href='/contacts']")));
+        Assert.assertTrue(
+                app.getUser().getText(By.xpath("" +
+                        "//div[@class='contact-item_card__2SOIM'][last()]//h3")).equals("9725115117"+i));
 
     }
 
@@ -48,19 +54,7 @@ public class AddContactsTest extends TestBase {
 
     }
 
-//    @Test
-//    public void AddContactTestNegativeLastName() {
-//        String name = "Tyron";
-//        String lastName = "Lancaster";
-//        String phoneNumber = "97251151175";
-//        String contEmail = "name45@mail.com";
-//        String address = "Royal Street 112 second floor Haifa";
-//        String description = "We met on vacation a couple of years ago.";
-//        app.getUser().openAddContactsForm();
-//        app.getUser().fillContactsForm(name, lastName, phoneNumber, contEmail, address, description);
-//        app.getUser().saveAddContactsForm();
-//        Assert.assertTrue(app.getUser().isElementPresent(By.xpath("//a[@href='/contacts']")));
-//    }
+
     @AfterClass
         public void tearDown() {
             //  wd.close();

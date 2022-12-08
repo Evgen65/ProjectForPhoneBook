@@ -60,6 +60,7 @@ public class HelperUser extends HelperBase {
         type(By.xpath("//input[@placeholder='Address']"), address);
         type(By.xpath("//input[@placeholder='description']"), description);
     }
+
     public void testLoginPositive() {
         String email = "abcd@mail.com";
         String password = "Abcd1234$";
@@ -75,6 +76,11 @@ public class HelperUser extends HelperBase {
             logout();
         }
     }
+
+    public String getText(By locator) {
+        return wd.findElement(locator).getText();
+    }
+
 }
 
 
