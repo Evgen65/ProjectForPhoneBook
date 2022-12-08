@@ -29,7 +29,7 @@ public class AddContactsTest extends TestBase {
                 .withDescription("We met on vacation a couple of years ago.");
 
                app.getUser().openAddContactsForm();
-        app.getUser().fillContactsForm("Tyron"+i, "Lancaster"+i, "name"+i+"@mail.com", "9725115117"+i, "Royal Street  Haifa"+i,"We met on vacation a couple of years ago.");
+        app.getUser().fillContactsForm("Tyron"+i, "Lancaster"+i, "9725115117", "name"+i+"@mail.com", "Royal Street  Haifa"+i,"We met on vacation a couple of years ago.");
         app.getUser().saveAddContactsForm();
         app.getUser().pause(3);
         Assert.assertTrue(
