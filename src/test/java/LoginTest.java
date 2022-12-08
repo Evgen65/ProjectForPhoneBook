@@ -6,28 +6,29 @@ import org.testng.annotations.Test;
 
 public class LoginTest<T> extends TestBase {
 
-  @BeforeMethod
-  public void preCondition(){
-   app.getUser().beLogOut();
-  }
+    @BeforeMethod
+    public void preCondition() {
+        app.getUser().beLogOut();
+    }
 
-  @Test
-  public void testLoginPositive() {
-      String email = "abcd@mail.com";
-      String password = "Abcd1234$";
+    @Test
+    public void testLoginPositive() {
+        String email = "abcd@mail.com";
+        String password = "Abcd1234$";
 
-      app.getUser().openLoginRegistrationForm();
-      app.getUser().fillLoginRegistrationForm(email, password);
-      app.getUser().submitLogin();
-      app.getUser().pause(3);
-       app.getUser().testLoginPositive();
-      Assert.assertTrue(app.getUser().isElementPresent(By.xpath("//a[@href='/add']")));
+        app.getUser().openLoginRegistrationForm();
+        app.getUser().fillLoginRegistrationForm(email, password);
+        app.getUser().submitLogin();
+        app.getUser().pause(3);
+     //   app.getUser().testLoginPositive();
+        Assert.assertTrue(app.getUser().isElementPresent(By.xpath("//a[@href='/add']")));
 
-  }
-  @AfterMethod
-  public void tearDown() {
-   //  wd.close();
-   //  wd.quit();
+    }
 
-  }
- }
+    @AfterMethod
+    public void tearDown() {
+        //  wd.close();
+        //  wd.quit();
+
+    }
+}
