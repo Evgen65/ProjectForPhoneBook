@@ -1,7 +1,10 @@
 package manager;
 
+import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class HelperUser extends HelperBase {
     public HelperUser(WebDriver wd) {
@@ -81,6 +84,26 @@ public class HelperUser extends HelperBase {
         return wd.findElement(locator).getText();
     }
 
+    public boolean isAlertPresent() {
+        Alert alert = new WebDriverWait(wd, 10).until(ExpectedConditions.alertIsPresent());
+        if(alert==null){
+            return false;
+        }else {
+            wd.switchTo().alert();
+            System.out.println(alert.getText());
+            alert.accept();
+           // alert.dismiss();for Cancel
+            //alert.sendKeys();for input
+            return  true;
+        }
+    }
+    public boolean isErrorMessageInFormat(){
+        Alert alert = new WebDriverWait(wd, 10)
+                .until((ExpectedConditions.alertIsPresent()));
+        String errorMassage ="Wrong email or password";
+        return alert.getText().contains(errorMassage);
+
+    }
 }
 
 
