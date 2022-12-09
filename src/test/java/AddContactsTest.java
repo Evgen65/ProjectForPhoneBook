@@ -8,33 +8,33 @@ import org.testng.annotations.Test;
 
 public class AddContactsTest extends TestBase {
     WebDriver wd;
-  // LoginTest test;
+    // LoginTest test;
 
     @BeforeClass
     public void preCondition() {
-       // test = new LoginTest();
+        // test = new LoginTest();
         boolean noLogged = app.getUser().isNoLogged();
         app.getUser().testLoginPositive();
     }
 
     @Test
     public void AddContactTestPositive() {
-        int i=(int)(System.currentTimeMillis()/1000)%360;
-        Contacts data=new Contacts()
-        .withName("Tyron"+i)
-                .withLastName("Lancaster"+i)
-                .withPhoneNumber("9725115117"+i)
-                .withContEmail("name"+i+"@mail.com")
-                .withAddress("Royal Street  Haifa"+i)
+        int i = (int) (System.currentTimeMillis() / 1000) % 360;
+        Contacts data = new Contacts()
+                .withName("Tyron" + i)
+                .withLastName("Lancaster" + i)
+                .withPhoneNumber("9725115117" + i)
+                .withContEmail("name" + i + "@mail.com")
+                .withAddress("Royal Street  Haifa" + i)
                 .withDescription("We met on vacation a couple of years ago.");
 
-               app.getUser().openAddContactsForm();
-        app.getUser().fillContactsForm("Tyron"+i, "Lancaster"+i, "9725115117", "name"+i+"@mail.com", "Royal Street  Haifa"+i,"We met on vacation a couple of years ago.");
+        app.getUser().openAddContactsForm();
+        app.getUser().fillContactsForm("Tyron" + i, "Lancaster" + i, "9725115117"+i, "name" + i + "@mail.com", "Royal Street  Haifa" + i, "We met on vacation a couple of years ago.");
         app.getUser().saveAddContactsForm();
         app.getUser().pause(3);
         Assert.assertTrue(
                 app.getUser().getText(By.xpath("" +
-                        "//div[@class='contact-item_card__2SOIM'][last()]//h3")).equals("9725115117"+i));
+                        "//div[@class='contact-item_card__2SOIM'][last()]//h3")).equals("9725115117"+i ));
 
     }
 
@@ -56,9 +56,9 @@ public class AddContactsTest extends TestBase {
 
 
     @AfterClass
-        public void tearDown() {
-            //  wd.close();
-            //  wd.quit();
+    public void tearDown() {
+        //  wd.close();
+        //  wd.quit();
 
-        }
     }
+}
