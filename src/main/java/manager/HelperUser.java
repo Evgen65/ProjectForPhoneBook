@@ -1,5 +1,7 @@
 package manager;
 
+import models.Contacts;
+import models.User;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -55,6 +57,13 @@ public class HelperUser extends HelperBase {
 
     }
 
+    public void fillLoginRegistrationForm(User data) {
+        type(By.xpath("//input[1]"), data.getEmail());
+        type(By.xpath("//input[2]"), data.getPassword());
+
+    }
+
+
     public void fillContactsForm(String name, String lastName, String phoneNumber, String contEmail, String address, String description) {
         type(By.xpath("//input[@placeholder='Name']"), name);
         type(By.xpath("//input[@placeholder='Last Name']"), lastName);
@@ -62,6 +71,16 @@ public class HelperUser extends HelperBase {
         type(By.xpath("//input[@placeholder='email']"), contEmail);
         type(By.xpath("//input[@placeholder='Address']"), address);
         type(By.xpath("//input[@placeholder='description']"), description);
+    }
+
+    public void fillContactsForm(Contacts data) {
+        type(By.xpath("//input[@placeholder='Name']"), data.getName());
+        type(By.xpath("//input[@placeholder='Last Name']"), data.getLastName());
+        type(By.xpath("//input[@placeholder='Phone']"), data.getPhoneNumber());
+        type(By.xpath("//input[@placeholder='email']"), data.getContEmail());
+        type(By.xpath("//input[@placeholder='Address']"), data.getAddress());
+        type(By.xpath("//input[@placeholder='description']"), data.getDescription());
+
     }
 
     public void testLoginPositive() {
@@ -85,25 +104,29 @@ public class HelperUser extends HelperBase {
     }
 
     public boolean isAlertPresent() {
-        Alert alert = new WebDriverWait(wd, 10).until(ExpectedConditions.alertIsPresent());
-        if(alert==null){
+        Alert alert = new WebDriverWait(wd, 10)
+                .until(ExpectedConditions.alertIsPresent());
+        if (alert == null) {
             return false;
-        }else {
+        } else {
             wd.switchTo().alert();
             System.out.println(alert.getText());
-            alert.accept();
-           // alert.dismiss();for Cancel
-            //alert.sendKeys();for input
-            return  true;
+            alert.accept();//for Ok
+            // alert.dismiss();for Cancel
+            //alert.sendKeys();for input data;
+            return true;
         }
     }
-    public boolean isErrorMessageInFormat(){
+
+    public boolean isErrorMessageInFormat() {
         Alert alert = new WebDriverWait(wd, 10)
                 .until((ExpectedConditions.alertIsPresent()));
-        String errorMassage ="Wrong email or password";
+        String errorMassage = "Wrong email or password";
         return alert.getText().contains(errorMassage);
 
     }
+
+
 }
 
 

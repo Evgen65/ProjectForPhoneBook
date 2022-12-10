@@ -37,6 +37,26 @@ public class AddContactsTest extends TestBase {
                         "//div[@class='contact-item_card__2SOIM'][last()]//h3")).equals("9725115117"+i ));
 
     }
+    @Test
+    public void AddContactTestPositiveModels() {
+        int i = (int) (System.currentTimeMillis() / 1000) % 360;
+        Contacts data = new Contacts()
+                .withName("Tyron" + i)
+                .withLastName("Lancaster" + i)
+                .withPhoneNumber("9725115117" + i)
+                .withContEmail("name" + i + "@mail.com")
+                .withAddress("Royal Street  Haifa" + i)
+                .withDescription("We met on vacation a couple of years ago.");
+
+        app.getUser().openAddContactsForm();
+        app.getUser().fillContactsForm(data);
+        app.getUser().saveAddContactsForm();
+        app.getUser().pause(3);
+        Assert.assertTrue(
+                app.getUser().getText(By.xpath("" +
+                        "//div[@class='contact-item_card__2SOIM'][last()]//h3")).equals("9725115117"+i ));
+
+    }
 
     @Test
     public void AddContactTestNegativeEmail() {
