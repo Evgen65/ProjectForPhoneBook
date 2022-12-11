@@ -19,15 +19,39 @@ public class LoginTest extends TestBase {
                 .withEmail("abcd@mail.com")
                 .withPassword("Abcd1234$");
         app.getUser().openLoginRegistrationForm();
-        app.getUser().fillLoginRegistrationForm("abcd@mail.com", "Abcd1234$");
+        app.getUser().fillLoginRegistrationForm(data);
         app.getUser().submitLogin();
         app.getUser().pause(3);
 
         Assert.assertTrue(app.getUser().isElementPresent(By.xpath("//a[@href='/add']")));
 
     }
+    @Test
+    public void testLoginNegativeEmail() {
+        User data = new User()
+                .withEmail("abcdmail.com")
+                .withPassword("Abcd1234$");
+        app.getUser().openLoginRegistrationForm();
+        app.getUser().fillLoginRegistrationForm(data);
+        app.getUser().submitLogin();
+        app.getUser().pause(3);
+        Assert.assertTrue(app.getUser().isErrorMessageInFormat());
+        Assert.assertTrue(app.getUser().isAlertPresent());
 
 
+    }
+    @Test
+    public void testLoginNegativePassword() {
+        User data = new User()
+                .withEmail("abcd@mail.com")
+                .withPassword("Abc");
+        app.getUser().openLoginRegistrationForm();
+        app.getUser().fillLoginRegistrationForm(data);
+        app.getUser().submitLogin();
+        app.getUser().pause(3);
+        Assert.assertTrue(app.getUser().isErrorMessageInFormat());
+        Assert.assertTrue(app.getUser().isAlertPresent());
+    }
     @AfterMethod
     public void tearDown() {
         //  wd.close();
