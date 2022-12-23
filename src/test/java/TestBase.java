@@ -1,15 +1,33 @@
 import manager.ApplicationManager;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.AfterSuite;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeSuite;
+
+import java.lang.reflect.Method;
 
 
 public class TestBase {
-    // WebDriver wd;
+
     public static ApplicationManager app = new ApplicationManager();
+
+    Logger logger = LoggerFactory.getLogger(ApplicationManager.class);
 
     @BeforeSuite
     public void setUp() {
         app.init();
+    }
+
+    @BeforeMethod
+    public void startTest(Method m) {
+        logger.info("Start test " + m.getName());
+    }
+
+    @AfterMethod
+    public void stopTest(Method m) {
+        logger.info("Stop test " + m.getName());
     }
 
     @AfterSuite
@@ -17,50 +35,6 @@ public class TestBase {
         app.stop();
     }
 
-//        public void pause(int time) {
-//            wd.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
-//        }
-
-//        public void click(By locator) {
-//            wd.findElement(locator).click();
-//        }
-
-//        public void type(By locator, String text) {
-//            WebElement element = wd.findElement(locator);
-//            element.click();
-//            element.clear();
-//            element.sendKeys(text);
-//        }
-
-//        public void openLoginRegistration() {
-//            click(By.xpath("//a[text()='LOGIN']"));
-//        }
-
-//        public void fillLoginRegistrationForm(String email, String password) {
-//            type(By.xpath("//input[1]"), email);
-//            type(By.xpath("//input[2]"), password);
-//
-//        }
-//        public void submitLogin() {
-//            click(By.xpath("//button[1]"));
-//        }
-    //open reg form
-//        public void submitRegistration() {
-//            click(By.xpath("//button[2]"));
-
-    //       }
-
-//        public boolean isElementPresent(By locator) {
-//            return wd.findElements(locator).size() > 0;
-//
-    //     }
-//       public boolean isLogged() {
-//
-//            return isElementPresent(By.xpath("l//button[text='Sign Out']"));
-//        }
-//        void logout() {
-//           // WebElement signOut = wd.findElement(By.xpath("//button[text='Sign Out']"));
-//            click(By.xpath("//button[text='Sign Out']"));
-//        }
 }
+
 

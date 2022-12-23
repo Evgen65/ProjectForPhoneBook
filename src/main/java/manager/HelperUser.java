@@ -58,8 +58,9 @@ public class HelperUser extends HelperBase {
     }
 
     public void fillLoginRegistrationForm(User data) {
-        type(By.xpath("//input[1]"), data.getEmail());
-        type(By.xpath("//input[2]"), data.getPassword());
+        type(By.xpath("//input[1]"),data.getEmail());
+       // type(By.xpath("//input[2]"), data.getPassword());
+        type(By.xpath("//input[2]"), null);
 
     }
 
@@ -70,7 +71,7 @@ public class HelperUser extends HelperBase {
         type(By.xpath("//input[@placeholder='Phone']"), phoneNumber);
         type(By.xpath("//input[@placeholder='email']"), contEmail);
         type(By.xpath("//input[@placeholder='Address']"), address);
-        type(By.xpath("//input[@placeholder='description']"), description);
+        type(By.xpath("//input[@placeholder='description']"), null);
     }
 
     public void fillContactsForm(Contacts data) {
@@ -79,7 +80,8 @@ public class HelperUser extends HelperBase {
         type(By.xpath("//input[@placeholder='Phone']"), data.getPhoneNumber());
         type(By.xpath("//input[@placeholder='email']"), data.getContEmail());
         type(By.xpath("//input[@placeholder='Address']"), data.getAddress());
-        type(By.xpath("//input[@placeholder='description']"), data.getDescription());
+       // type(By.xpath("//input[@placeholder='description']"), data.getDescription());
+        type(By.xpath("//input[@placeholder='description']"), null);
 
     }
 
@@ -115,6 +117,7 @@ public class HelperUser extends HelperBase {
             // alert.dismiss();for Cancel
             //alert.sendKeys();for input data;
             return true;
+           // return false;
         }
     }
 

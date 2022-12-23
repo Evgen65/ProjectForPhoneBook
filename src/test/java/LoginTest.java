@@ -18,6 +18,7 @@ public class LoginTest extends TestBase {
         User data = new User()
                 .withEmail("abcd@mail.com")
                 .withPassword("Abcd1234$");
+        logger.info("TestloginPositive  with email: " + data.getEmail() + " pasword: " + data.getPassword());
         app.getUser().openLoginRegistrationForm();
         app.getUser().fillLoginRegistrationForm(data);
         app.getUser().submitLogin();
@@ -31,6 +32,7 @@ public class LoginTest extends TestBase {
         User data = new User()
                 .withEmail("abcdmail.com")
                 .withPassword("Abcd1234$");
+        logger.info("TestloginNegative  with email: " + data.getEmail() + " password: " + data.getPassword());
         app.getUser().openLoginRegistrationForm();
         app.getUser().fillLoginRegistrationForm(data);
         app.getUser().submitLogin();
@@ -45,6 +47,7 @@ public class LoginTest extends TestBase {
         User data = new User()
                 .withEmail("abcd@mail.com")
                 .withPassword("Abc");
+        logger.info("TestloginNegative  with email: " + data.getEmail() + " password: " + data.getPassword());
         app.getUser().openLoginRegistrationForm();
         app.getUser().fillLoginRegistrationForm(data);
         app.getUser().submitLogin();
