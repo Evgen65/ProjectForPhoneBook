@@ -24,6 +24,8 @@ public class ApplicationManager {
         wd.navigate().to("https://telranedu.web.app/");
         wd.manage().window().maximize();
         user = new HelperUser(wd);
+        contact = new HelperContact(wd);
+
     }
     public void stop() {
         //  wd.close();

@@ -16,9 +16,11 @@ public class RegistrationTest extends TestBase {
     @Test
     public void testRegistrationPositive() {
         int i = (int) (System.currentTimeMillis() / 1000) % 3600;
-        User data = new User()
-                .withEmail("name" + i + "@mail.com")
-                .withPassword("Abcd1234$");
+        User data = User.builder()
+                .email("name" + 1+"@mail.com")
+                .password("Abcd1234$")
+                .build();
+
         logger.info("registrationPositiveTest with email: " + data.getEmail() + " pasword: " + data.getPassword());
 
         app.getUser().openLoginRegistrationForm();
@@ -33,9 +35,11 @@ public class RegistrationTest extends TestBase {
     @Test
     public void registrationWrongEmail() {
         int i = (int) (System.currentTimeMillis() / 1000) % 3600;
-        User data = new User()
-                .withEmail("name" + i + "mail.com")
-                .withPassword("Abcd1234$");
+        User data = User.builder()
+                .email("name" + 1+"mail.com")
+                .password("Abcd1234$")
+                .build();
+
         app.getUser().openLoginRegistrationForm();
         app.getUser().fillLoginRegistrationForm("name" + i + "mail.com", "Abcd1234$");
         app.getUser().submitRegistration();
@@ -49,10 +53,13 @@ public class RegistrationTest extends TestBase {
     @Test
     public void registrationWrongEmailModel() {
         int i = (int) (System.currentTimeMillis() / 1000) % 3600;
-        User data = new User()
-                .withEmail("name" + i + "mail.com")
-                .withPassword("Abcd1234$");
+        User data = User.builder()
+                .email("name" + 1+"mail.com")
+                .password("Abcd")
+                .build();
+
         logger.info("registrationNegativeTest with email: " + data.getEmail() + " pasword: " + data.getPassword());
+
         app.getUser().openLoginRegistrationForm();
         app.getUser().fillLoginRegistrationForm(data);
         app.getUser().submitRegistration();

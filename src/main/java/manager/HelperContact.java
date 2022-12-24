@@ -1,27 +1,79 @@
 package manager;
 
+import models.Contact;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-public class HelperContact extends  HelperBase{
+import java.util.Collection;
+import java.util.Iterator;
+import java.util.List;
+
+public class HelperContact extends HelperBase {
     public HelperContact(WebDriver wd) {
         super(wd);
     }
-    public void  openContactForm(){
+    Logger logger = LoggerFactory.getLogger(HelperContact.class);
 
+    public void openContactForm(){
+        click(By.cssSelector("a[href='/add']"));
     }
+
     public void fillContactForm(Contact contact){
-        type(By.xpath("//input[@placeholder='Name']"),contact.getName());
-        type(By.xpath("//input[@placeholder='Last Name']"), contact.getLastName());
-        type(By.xpath("//input[@placeholder='Phone']"), contact.getPhoneNumber());
-        type(By.xpath("//input[@placeholder='email']"), contact.getContEmail());
-        type(By.xpath("//input[@placeholder='Address']"), contact.getAddress());
-         type(By.xpath("//input[@placeholder='description']"), contact.getDescription());
-       // type(By.xpath("//input[@placeholder='description']"), null);
+
+        type(By.xpath("//input[1]"), contact.getName());
+        type(By.xpath("//input[2]"), contact.getLastName());
+        type(By.xpath("//input[3]"), contact.getPhoneNumber());
+        type(By.xpath("//input[4]"), contact.getContEmail());
+        type(By.xpath("//input[5]"), contact.getAddress());
+        type(By.xpath("//input[6]"), contact.getDescription());
 
     }
+
     public void submitContactForm(){
+        click(By.xpath("//div[@class='add_form__2rsm2']//button"));
+    }
+
+    public void isContactCreated(){
 
     }
 
+    public int removeOneContact() {
+        int countBefore = countOfContacts();
+        logger.info("Number of contacts before is " + countBefore);
+        String phone = wd.findElement(By.cssSelector(".contact-item_card__2SOIM h3")).getText();
+        logger.info("The deleted number is " + phone);
+        click(By.cssSelector(".contact-item_card__2SOIM"));
+        click(By.xpath("//button[.='Remove']"));
+        pause(10000);
+        int countAfter = countOfContacts();
+        logger.info("Number of contacts after is " + countAfter);
+
+        return countAfter - countBefore;
+    }
+
+    private int countOfContacts() {
+        return wd.findElements(By.cssSelector(".contact-item_card__2SOIM")).size();
+    }
+
+    public void removeAllContacts() {
+        int countBefore = countOfContacts();
+        logger.info("Number of contacts before is " + countBefore);
+        List<WebElement> contact=wd.findElements(By.xpath("//div[@class='contact-item_card__2SOIM']"));
+        Iterator<WebElement> iterator=contact.listIterator();
+        while (iterator.hasNext()){
+            iterator.next();
+            iterator.remove();
+        }
+
+      //  phones.removeAll(phones);
+
+        int countAfter = countOfContacts();
+        logger.info("Number of contacts after is " + countAfter);
+
+    }
 }
+
+

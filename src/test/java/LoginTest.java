@@ -15,9 +15,10 @@ public class LoginTest extends TestBase {
 
     @Test
     public void testLoginPositive() {
-        User data = new User()
-                .withEmail("abcd@mail.com")
-                .withPassword("Abcd1234$");
+        User data = User.builder()
+                .email("abcd@mail.com")
+                .password("Abcd1234$")
+                .build();
         logger.info("TestloginPositive  with email: " + data.getEmail() + " pasword: " + data.getPassword());
         app.getUser().openLoginRegistrationForm();
         app.getUser().fillLoginRegistrationForm(data);
@@ -27,11 +28,14 @@ public class LoginTest extends TestBase {
         Assert.assertTrue(app.getUser().isElementPresent(By.xpath("//a[@href='/add']")));
 
     }
+
     @Test
     public void testLoginNegativeEmail() {
-        User data = new User()
-                .withEmail("abcdmail.com")
-                .withPassword("Abcd1234$");
+        User data = User.builder()
+                .email("abcdmail.com")
+                .password("Abcd1234$")
+                .build();
+
         logger.info("TestloginNegative  with email: " + data.getEmail() + " password: " + data.getPassword());
         app.getUser().openLoginRegistrationForm();
         app.getUser().fillLoginRegistrationForm(data);
@@ -40,13 +44,14 @@ public class LoginTest extends TestBase {
         Assert.assertTrue(app.getUser().isErrorMessageInFormat());
         Assert.assertTrue(app.getUser().isAlertPresent());
 
-
     }
+
     @Test
     public void testLoginNegativePassword() {
-        User data = new User()
-                .withEmail("abcd@mail.com")
-                .withPassword("Abc");
+        User data = User.builder()
+                .email("abcd@mail.com")
+                .password("Abcd")
+                .build();
         logger.info("TestloginNegative  with email: " + data.getEmail() + " password: " + data.getPassword());
         app.getUser().openLoginRegistrationForm();
         app.getUser().fillLoginRegistrationForm(data);
@@ -55,6 +60,7 @@ public class LoginTest extends TestBase {
         Assert.assertTrue(app.getUser().isErrorMessageInFormat());
         Assert.assertTrue(app.getUser().isAlertPresent());
     }
+
     @AfterMethod
     public void tearDown() {
         //  wd.close();
