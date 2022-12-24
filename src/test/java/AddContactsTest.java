@@ -12,8 +12,6 @@ public class AddContactsTest extends TestBase {
     public void preCondition() {
         if (app.getUser().isLogged()) {
            // app.getUser().pause(3);
-
-
         } else {
             app.getUser().openLoginRegistrationForm();
             app.getUser().fillLoginRegistrationForm("abcd@mail.com", "Abcd1234$");
@@ -21,8 +19,7 @@ public class AddContactsTest extends TestBase {
             app.getUser().pause(3);
         }
     }
-
-    @Test(invocationCount = 3)
+    @Test(invocationCount = 5)
     public void addNewContactPositiveTest() {
         int i = (int) (System.currentTimeMillis() / 1000) % 3600;
         Contact contact = Contact.builder()
@@ -33,21 +30,25 @@ public class AddContactsTest extends TestBase {
                 .address("Haifa, Allenby, " + i)
                 .description("We met on the my offs.")
                 .build();
-        logger.info("AddContactTestPositive  with Name: " + contact.getName() + " Last Name: " + contact.getLastName() + " Phone Number :"
+        logger.info("AddContactTestPositive  with Name: " + contact.getName()
+                + " Last Name: " + contact.getLastName() + " Phone Number :"
                 + contact.getPhoneNumber() +
                 " Contact Email : " + contact
                 .getContEmail() + " Address : " + contact.getAddress() + " Description : " + contact.getDescription());
-
+        app.getContact().countOfContacts();
+        int countBefore = app.getContact().countOfContacts();
+        logger.info("Number of contacts before is " + countBefore);
         app.getContact().openContactForm();
         app.getContact().fillContactForm(contact);
         app.getContact().submitContactForm();
+        int countAfter = app.getContact().countOfContacts();
+        logger.info("Number of contacts after is " + countAfter);
 
         Assert.assertTrue(
                 app.getUser().getText(By.xpath("" +
                         "//div[@class='contact-item_card__2SOIM'][last()]//h3")).equals(contact.getPhoneNumber())
         );
     }
-
 
     @Test
     public void AddContactTestNegativeEmail() {
@@ -61,7 +62,8 @@ public class AddContactsTest extends TestBase {
                 .description("We met on vacation a couple of years ago.")
                 .build();
 
-        logger.info("AddContactTestNegative  with Name: " + contact.getName() + " Last Name: " + contact.getLastName() + " Phone Number :"
+        logger.info("AddContactTestNegative  with Name: " + contact.getName() + " Last Name: "
+                + contact.getLastName() + " Phone Number :"
                 + contact.getPhoneNumber() +
                 " Contact Email : " + contact
                 .getContEmail() + " Address : " + contact.getAddress() + " Description : " + contact.getDescription());

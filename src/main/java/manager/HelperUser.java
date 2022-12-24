@@ -30,25 +30,19 @@ public class HelperUser extends HelperBase {
         pause(10);
     }
 
-
     public void logout() {
 
         click(By.xpath("//button[text='Sign Out']"));
     }
 
-
     public void openLoginRegistrationForm() {
         click(By.xpath("//a[text()='LOGIN']"));
     }
 
-
-
     public void fillLoginRegistrationForm(String email, String password) {
         type(By.xpath("//input[1]"), email);
         type(By.xpath("//input[2]"), password);
-
     }
-
     public void fillLoginRegistrationForm(User data) {
         type(By.xpath("//input[1]"),data.getEmail());
         type(By.xpath("//input[2]"), data.getPassword());
@@ -59,8 +53,6 @@ public class HelperUser extends HelperBase {
             logout();
         }
     }
-
-
 
     public boolean isAlertPresent() {
         Alert alert = new WebDriverWait(wd, 10)
@@ -77,13 +69,11 @@ public class HelperUser extends HelperBase {
            // return false;
         }
     }
-
     public boolean isErrorMessageInFormat() {
         Alert alert = new WebDriverWait(wd, 10)
                 .until((ExpectedConditions.alertIsPresent()));
         String errorMassage = "Wrong email or password";
         return alert.getText().contains(errorMassage);
-
     }
 }
 

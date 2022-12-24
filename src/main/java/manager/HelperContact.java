@@ -15,13 +15,14 @@ public class HelperContact extends HelperBase {
     public HelperContact(WebDriver wd) {
         super(wd);
     }
+
     Logger logger = LoggerFactory.getLogger(HelperContact.class);
 
-    public void openContactForm(){
+    public void openContactForm() {
         click(By.cssSelector("a[href='/add']"));
     }
 
-    public void fillContactForm(Contact contact){
+    public void fillContactForm(Contact contact) {
 
         type(By.xpath("//input[1]"), contact.getName());
         type(By.xpath("//input[2]"), contact.getLastName());
@@ -32,12 +33,11 @@ public class HelperContact extends HelperBase {
 
     }
 
-    public void submitContactForm(){
+    public void submitContactForm() {
         click(By.xpath("//div[@class='add_form__2rsm2']//button"));
     }
 
-    public void isContactCreated(){
-
+    public void isContactCreated() {
     }
 
     public int removeOneContact() {
@@ -47,33 +47,28 @@ public class HelperContact extends HelperBase {
         logger.info("The deleted number is " + phone);
         click(By.cssSelector(".contact-item_card__2SOIM"));
         click(By.xpath("//button[.='Remove']"));
-        pause(10000);
+        pause(3000);
         int countAfter = countOfContacts();
         logger.info("Number of contacts after is " + countAfter);
-
-        return countAfter - countBefore;
+        return countAfter-countBefore;
     }
 
-    private int countOfContacts() {
+    public int countOfContacts() {
         return wd.findElements(By.cssSelector(".contact-item_card__2SOIM")).size();
     }
 
     public void removeAllContacts() {
         int countBefore = countOfContacts();
         logger.info("Number of contacts before is " + countBefore);
-        List<WebElement> contact=wd.findElements(By.xpath("//div[@class='contact-item_card__2SOIM']"));
-        Iterator<WebElement> iterator=contact.listIterator();
-        while (iterator.hasNext()){
-            iterator.next();
-            iterator.remove();
+        List<WebElement> contact = wd.findElements(By.xpath("//div[@class='contact-item_card__2SOIM']"));
+        Iterator<WebElement> contacts = contact.stream().iterator();
+        while (contacts.hasNext()) {
+            contacts.next().click();
+
+            click(By.xpath("//button[.='Remove']"));
+            int countAfter = countOfContacts();
+            pause(1500);
+            logger.info("Number of contacts after is " + countAfter);
         }
-
-      //  phones.removeAll(phones);
-
-        int countAfter = countOfContacts();
-        logger.info("Number of contacts after is " + countAfter);
-
     }
 }
-
-

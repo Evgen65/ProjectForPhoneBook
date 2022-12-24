@@ -10,7 +10,6 @@ public class LoginTest extends TestBase {
     @BeforeMethod
     public void preCondition() {
         app.getUser().beLogOut();
-
     }
 
     @Test
@@ -42,7 +41,9 @@ public class LoginTest extends TestBase {
         app.getUser().submitLogin();
         app.getUser().pause(3);
         Assert.assertTrue(app.getUser().isErrorMessageInFormat());
+        app.getUser().pause(5);
         Assert.assertTrue(app.getUser().isAlertPresent());
+        app.getUser().returnToHome();
 
     }
 
@@ -59,6 +60,7 @@ public class LoginTest extends TestBase {
         app.getUser().pause(3);
         Assert.assertTrue(app.getUser().isErrorMessageInFormat());
         Assert.assertTrue(app.getUser().isAlertPresent());
+        app.getUser().returnToHome();
     }
 
     @AfterMethod

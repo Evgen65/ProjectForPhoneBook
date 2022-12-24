@@ -1,4 +1,5 @@
 import models.User;
+import org.openqa.selenium.By;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -14,17 +15,20 @@ public class RemoveContactTest extends TestBase {
         }
     }
 
-
     @Test
     public void removeOneContactPositive() {
-
-       int result = app.getContact().removeOneContact();
-        Assert.assertEquals(result, -1);
-
+        if (app.getContact().countOfContacts() > 0) {
+            app.getContact().removeOneContact();
+            int result = app.getContact().removeOneContact();
+            Assert.assertEquals(result,-1);
+        }
     }
 
     @Test
     public void removeAllContactsPositive() {
-        app.getContact().removeAllContacts();
+        if (app.getContact().countOfContacts() > 0) {
+            app.getContact().removeAllContacts();
+            Assert.assertTrue(app.getContact().isElementPresent(By.xpath("//h1[.=' No Contacts here!']")));
+        }
     }
 }

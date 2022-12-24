@@ -16,7 +16,6 @@ public class ApplicationManager {
     HelperUser user;
     HelperContact contact;
 
-
     public void init() {
         //wd = new ChromeDriver();
         wd=new EventFiringWebDriver(new ChromeDriver());
@@ -25,7 +24,6 @@ public class ApplicationManager {
         wd.manage().window().maximize();
         user = new HelperUser(wd);
         contact = new HelperContact(wd);
-
     }
     public void stop() {
         //  wd.close();
