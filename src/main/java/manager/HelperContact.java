@@ -47,7 +47,7 @@ public class HelperContact extends HelperBase {
         logger.info("The deleted number is " + phone);
         click(By.cssSelector(".contact-item_card__2SOIM"));
         click(By.xpath("//button[.='Remove']"));
-        pause(3000);
+        pause(3500);
         int countAfter = countOfContacts();
         logger.info("Number of contacts after is " + countAfter);
         return countAfter-countBefore;
