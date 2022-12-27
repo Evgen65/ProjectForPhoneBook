@@ -4,11 +4,9 @@ import models.Contact;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 
@@ -33,7 +31,6 @@ public class HelperContact extends HelperBase {
         type(By.xpath("//input[6]"), contact.getDescription());
 
     }
-
     public void submitContactForm() {
         click(By.xpath("//div[@class='add_form__2rsm2']//button"));
     }
@@ -42,19 +39,31 @@ public class HelperContact extends HelperBase {
     }
 
     public int removeOneContact() {
+//        pause(3000);
+//        int countBefore = countOfContacts();
+//        logger.info("Number of contacts before is " + countBefore);
+//        String phone = wd.findElement(By.cssSelector(".contact-item_card__2SOIM h3")).getText();
+//        logger.info("The deleted number is " + phone);
+//        click(By.cssSelector(".contact-item_card__2SOIM"));
+//        click(By.xpath("//button[.='Remove']"));
+//        pause(3000);
+//        int countAfter = countOfContacts();
+//        logger.info("Number of contacts after is " + countAfter);
+//        return countAfter - countBefore;
+
+        pause(3000);
         int countBefore = countOfContacts();
         logger.info("Number of contacts before is " + countBefore);
         String phone = wd.findElement(By.cssSelector(".contact-item_card__2SOIM h3")).getText();
         logger.info("The deleted number is " + phone);
         click(By.cssSelector(".contact-item_card__2SOIM"));
         click(By.xpath("//button[.='Remove']"));
-        pause(6500);
+        pause(5);
         int countAfter = countOfContacts();
         logger.info("Number of contacts after is " + countAfter);
-        return countAfter-countBefore;
 
+        return countAfter - countBefore;
     }
-
     public int countOfContacts() {
         return wd.findElements(By.cssSelector(".contact-item_card__2SOIM")).size();
     }
@@ -73,6 +82,12 @@ public class HelperContact extends HelperBase {
             logger.info("Number of contacts after is " + countAfter);
         }
     }
+//        pause(3000);
+//        while (wd.findElements(By.cssSelector(".contact-item_card__2SOIM")).size() != 0) ;
+//        pause(3000);
+//        removeOneContact();
+//        pause(3000);
+    }
 
 
-}
+

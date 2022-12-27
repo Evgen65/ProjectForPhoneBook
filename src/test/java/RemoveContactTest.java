@@ -15,9 +15,8 @@ public class RemoveContactTest extends TestBase {
         }
        // app.getContact().pause(10);
     }
-
     @BeforeMethod
-    public void addMissingContacts() {
+    public void addContacts() {
         if (app.getContact().countOfContacts()==0) {
             int i = (int) (System.currentTimeMillis() / 1000) % 3600;
             Contact contact = Contact.builder()
@@ -31,25 +30,24 @@ public class RemoveContactTest extends TestBase {
             app.getContact().openContactForm();
             app.getContact().fillContactForm(contact);
             app.getContact().submitContactForm();
+           // app.getContact().returnToAdd();
         }
     }
-
-    @Test
+     @Test
     public void removeOneContactPositive() {
         if (app.getContact().countOfContacts() > 0) {
             app.getContact().removeOneContact();
             int result = app.getContact().removeOneContact();
-           // Assert.assertEquals(result, -1);
+          // Assert.assertEquals(result, -1);
         }
     }
-
     @Test
     public void removeAllContactsPositive() {
         if (app.getContact().countOfContacts() > 0) {
             app.getContact().removeAllContacts();
             Assert.assertTrue(app.getContact().isElementPresent(By.xpath("//h1[.=' No Contacts here!']")));
         }
-    }
 
+   }
 
 }

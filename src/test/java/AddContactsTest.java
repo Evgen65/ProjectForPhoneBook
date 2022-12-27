@@ -19,7 +19,7 @@ public class AddContactsTest extends TestBase {
             app.getUser().pause(3);
         }
     }
-    @Test(invocationCount = 8)
+    @Test(invocationCount = 12)
     public void addNewContactPositiveTest() {
         int i = (int) (System.currentTimeMillis() / 1000) % 3600;
         Contact contact = Contact.builder()
