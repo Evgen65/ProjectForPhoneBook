@@ -12,33 +12,32 @@ public class RemoveContactTest extends TestBase {
                     .email("abcd@mail.com")
                     .password("Abcd1234$")
                     .build());
-        }
-       // app.getContact().pause(10);
+        }        app.getContact().pause(2500);
     }
     @BeforeMethod
-    public void addContacts() {
-        if (app.getContact().countOfContacts()==0) {
-            int i = (int) (System.currentTimeMillis() / 1000) % 3600;
-            Contact contact = Contact.builder()
-                    .name("Gregory" + i)
-                    .lastName("Pek" + i)
-                    .phoneNumber("055666777" + i)
-                    .contEmail("name" + i + "@mail.com")
-                    .address("Haifa, Allenby, " + i)
-                    .description("We met on the my offs.")
-                    .build();
+    public void addContactsBeforeRemove() {
+        for(int i=0;i<5;i++) {
             app.getContact().openContactForm();
-            app.getContact().fillContactForm(contact);
-            app.getContact().submitContactForm();
-           // app.getContact().returnToAdd();
-        }
+        int a = (int) (System.currentTimeMillis() / 1000) % 3600;
+        Contact contact = Contact.builder()
+                .name("Gregory" + a)
+                .lastName("Pek" + a)
+                .phoneNumber(a+"6777" + a)
+                .contEmail("name" + a + "@mail.com")
+                .address("Haifa, Allenby, " + a)
+                .description("We met on the my offs.")
+                .build();
+
+                app.getContact().fillContactForm(contact);
+                app.getContact().submitContactForm();
+                app.getContact().pause(1000);
+            }
     }
-     @Test
+    @Test
     public void removeOneContactPositive() {
         if (app.getContact().countOfContacts() > 0) {
-            app.getContact().removeOneContact();
             int result = app.getContact().removeOneContact();
-          // Assert.assertEquals(result, -1);
+            Assert.assertEquals(result, -1);
         }
     }
     @Test
@@ -47,7 +46,5 @@ public class RemoveContactTest extends TestBase {
             app.getContact().removeAllContacts();
             Assert.assertTrue(app.getContact().isElementPresent(By.xpath("//h1[.=' No Contacts here!']")));
         }
-
-   }
-
+    }
 }

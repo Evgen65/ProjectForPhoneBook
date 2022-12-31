@@ -30,16 +30,13 @@ public class HelperBase {
     }
 
     public void pause(int time) {
-            wd.manage().timeouts().implicitlyWait(time, TimeUnit.SECONDS);
-//        try {
-//            Thread.sleep(time);
-//        } catch (InterruptedException e) {
-//            throw new RuntimeException(e);
-//        }
-
-
+      //     wd.manage().timeouts().implicitlyWait(time, TimeUnit.SECONDS);
+        try {
+            Thread.sleep(time);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
     }
-
     public String getText(By locator) {
         return wd.findElement(locator).getText();
     }

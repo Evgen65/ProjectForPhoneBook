@@ -2,6 +2,8 @@ package manager;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.remote.BrowserType;
 import org.openqa.selenium.support.events.EventFiringWebDriver;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,10 +17,18 @@ public class ApplicationManager {
     EventFiringWebDriver wd;
     HelperUser user;
     HelperContact contact;
+    String browser;
+
 
     public void init() {
         //wd = new ChromeDriver();
-        wd=new EventFiringWebDriver(new ChromeDriver());
+        if(browser.equals(BrowserType.FIREFOX)) {
+            wd = new EventFiringWebDriver(new FirefoxDriver());
+            logger.info(("Test on FIREFOX"));
+        }else if(browser.equals(BrowserType.CHROME)){
+            wd=new EventFiringWebDriver(new ChromeDriver());
+            logger.info("Test on CHROME");
+        }
         wd.register(new MyListener());
         wd.navigate().to("https://telranedu.web.app/");
         wd.manage().window().maximize();
@@ -36,5 +46,9 @@ public class ApplicationManager {
 
     public HelperContact getContact() {
         return contact;
+    }
+
+    public ApplicationManager(String browser) {
+        this.browser = browser;
     }
 }

@@ -16,16 +16,16 @@ public class AddContactsTest extends TestBase {
             app.getUser().openLoginRegistrationForm();
             app.getUser().fillLoginRegistrationForm("abcd@mail.com", "Abcd1234$");
             app.getUser().submitLogin();
-            app.getUser().pause(3);
+            app.getUser().pause(2500);
         }
     }
-    @Test(invocationCount = 12)
+    @Test(invocationCount = 3)
     public void addNewContactPositiveTest() {
         int i = (int) (System.currentTimeMillis() / 1000) % 3600;
         Contact contact = Contact.builder()
                 .name("Gregory" + i)
                 .lastName("Pek" + i)
-                .phoneNumber("055666777" + i)
+                .phoneNumber(i+"6777" + i)
                 .contEmail("name" + i + "@mail.com")
                 .address("Haifa, Allenby, " + i)
                 .description("We met on the my offs.")
@@ -40,6 +40,7 @@ public class AddContactsTest extends TestBase {
         logger.info("Number of contacts before is " + countBefore);
         app.getContact().openContactForm();
         app.getContact().fillContactForm(contact);
+        app.getContact().pause(1000);
         app.getContact().submitContactForm();
         int countAfter = app.getContact().countOfContacts();
         logger.info("Number of contacts after is " + countAfter);

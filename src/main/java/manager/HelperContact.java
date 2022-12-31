@@ -31,6 +31,7 @@ public class HelperContact extends HelperBase {
         type(By.xpath("//input[6]"), contact.getDescription());
 
     }
+
     public void submitContactForm() {
         click(By.xpath("//div[@class='add_form__2rsm2']//button"));
     }
@@ -39,55 +40,46 @@ public class HelperContact extends HelperBase {
     }
 
     public int removeOneContact() {
-//        pause(3000);
-//        int countBefore = countOfContacts();
-//        logger.info("Number of contacts before is " + countBefore);
-//        String phone = wd.findElement(By.cssSelector(".contact-item_card__2SOIM h3")).getText();
-//        logger.info("The deleted number is " + phone);
-//        click(By.cssSelector(".contact-item_card__2SOIM"));
-//        click(By.xpath("//button[.='Remove']"));
-//        pause(3000);
-//        int countAfter = countOfContacts();
-//        logger.info("Number of contacts after is " + countAfter);
-//        return countAfter - countBefore;
-
-        pause(3000);
+        pause(2500);
         int countBefore = countOfContacts();
         logger.info("Number of contacts before is " + countBefore);
         String phone = wd.findElement(By.cssSelector(".contact-item_card__2SOIM h3")).getText();
         logger.info("The deleted number is " + phone);
         click(By.cssSelector(".contact-item_card__2SOIM"));
         click(By.xpath("//button[.='Remove']"));
-        pause(5);
+        pause(3000);
         int countAfter = countOfContacts();
         logger.info("Number of contacts after is " + countAfter);
 
         return countAfter - countBefore;
     }
+
     public int countOfContacts() {
         return wd.findElements(By.cssSelector(".contact-item_card__2SOIM")).size();
     }
 
-    public void removeAllContacts() {
-        int countBefore = countOfContacts();
-        logger.info("Number of contacts before is " + countBefore);
-        List<WebElement> contact = wd.findElements(By.xpath("//div[@class='contact-item_card__2SOIM']"));
-        Iterator<WebElement> contacts = contact.stream().iterator();
-        while (contacts.hasNext()) {
-            contacts.next().click();
-
-            click(By.xpath("//button[.='Remove']"));
-            int countAfter = countOfContacts();
-            pause(1500);
-            logger.info("Number of contacts after is " + countAfter);
+//    public void removeAllContacts() {
+//        pause(1900);
+//        int countBefore = countOfContacts();
+//        logger.info("Number of contacts before is " + countBefore);
+//        List<WebElement> contact = wd.findElements(By.xpath("//div[@class='contact-item_card__2SOIM']"));
+//        Iterator<WebElement> contacts = contact.stream().iterator();
+//        while (contacts.hasNext()) {
+//            contacts.next().click();
+//
+//            click(By.xpath("//button[.='Remove']"));
+//            pause(1500);
+//            int countAfter = countOfContacts();
+//            logger.info("Number of contacts after is " + countAfter);
+//        }
+//           }
+        public void removeAllContacts() {
+            pause(2000);
+            while(wd.findElements(By.cssSelector(".contact-item_card__2SOIM")).size()!=0){
+                removeOneContact();
+            }
         }
-    }
-//        pause(3000);
-//        while (wd.findElements(By.cssSelector(".contact-item_card__2SOIM")).size() != 0) ;
-//        pause(3000);
-//        removeOneContact();
-//        pause(3000);
-    }
 
+}
 
 
