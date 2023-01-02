@@ -12,7 +12,7 @@ import java.lang.reflect.Method;
 
 public class TestBase {
 
-    public static ApplicationManager app = new ApplicationManager(System.getProperty("bpowser", BrowserType.CHROME));
+    public static ApplicationManager app = new ApplicationManager(System.getProperty("browser", BrowserType.CHROME));
 
     Logger logger = LoggerFactory.getLogger(ApplicationManager.class);
 

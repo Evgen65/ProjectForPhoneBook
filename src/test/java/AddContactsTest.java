@@ -11,7 +11,7 @@ public class AddContactsTest extends TestBase {
     @BeforeMethod
     public void preCondition() {
         if (app.getUser().isLogged()) {
-           // app.getUser().pause(3);
+            // app.getUser().pause(3);
         } else {
             app.getUser().openLoginRegistrationForm();
             app.getUser().fillLoginRegistrationForm("abcd@mail.com", "Abcd1234$");
@@ -19,13 +19,14 @@ public class AddContactsTest extends TestBase {
             app.getUser().pause(2500);
         }
     }
-    @Test(invocationCount = 3)
+
+    @Test(invocationCount = 5)
     public void addNewContactPositiveTest() {
         int i = (int) (System.currentTimeMillis() / 1000) % 3600;
         Contact contact = Contact.builder()
                 .name("Gregory" + i)
                 .lastName("Pek" + i)
-                .phoneNumber(i+"6777" + i)
+                .phoneNumber(i + "6777" + i)
                 .contEmail("name" + i + "@mail.com")
                 .address("Haifa, Allenby, " + i)
                 .description("We met on the my offs.")
@@ -42,12 +43,13 @@ public class AddContactsTest extends TestBase {
         app.getContact().fillContactForm(contact);
         app.getContact().pause(1000);
         app.getContact().submitContactForm();
+        app.getContact().pause(2000);
         int countAfter = app.getContact().countOfContacts();
         logger.info("Number of contacts after is " + countAfter);
 
         Assert.assertTrue(
                 app.getUser().getText(By.xpath("" +
-                        "//div[@class='contact-item_card__2SOIM'][last()]//h3")).equals(contact.getPhoneNumber())
+                        "//div[contains(@class,'contact-page_leftdiv__yhyke')]")).contains(contact.getPhoneNumber())
         );
     }
 
@@ -57,7 +59,7 @@ public class AddContactsTest extends TestBase {
         Contact contact = Contact.builder()
                 .name("Tyron" + i)
                 .lastName("Lancaster" + i)
-                .phoneNumber("9725115117" + i)
+                .phoneNumber(i+"15117" + i)
                 .contEmail("name" + i + "mail.com")
                 .address("Royal Street  Haifa" + i)
                 .description("We met on vacation a couple of years ago.")

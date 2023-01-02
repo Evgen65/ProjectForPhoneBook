@@ -10,6 +10,7 @@ public class RegistrationTest extends TestBase {
 
     @BeforeMethod
     public void preCondition() {
+
         app.getUser().beLogOut();
     }
 
@@ -17,7 +18,7 @@ public class RegistrationTest extends TestBase {
     public void testRegistrationPositive() {
         int i = (int) (System.currentTimeMillis() / 1000) % 3600;
         User data = User.builder()
-                .email("name" + 1+"@mail.com")
+                .email(+i+"@mail.com")
                 .password("Abcd" +i+"$")
                 .build();
 
@@ -27,7 +28,7 @@ public class RegistrationTest extends TestBase {
         // app.getUser().fillLoginRegistrationForm("name" + i + "mail.com", "Abcd1234$");
         app.getUser().fillLoginRegistrationForm(data);
         app.getUser().submitRegistration();
-        app.getUser().pause(3);
+        app.getUser().pause(3000);
         Assert.assertTrue(app.getUser().isElementPresent(By.xpath("//button")));
 
     }
