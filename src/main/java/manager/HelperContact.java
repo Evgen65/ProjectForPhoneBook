@@ -74,7 +74,7 @@ public class HelperContact extends HelperBase {
 //        }
 //           }
         public void removeAllContacts() {
-            pause(2000);
+            pause(2200);
             while(wd.findElements(By.cssSelector(".contact-item_card__2SOIM")).size()!=0){
                 removeOneContact();
             }

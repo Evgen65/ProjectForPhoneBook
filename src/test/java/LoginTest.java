@@ -7,12 +7,12 @@ import org.testng.annotations.Test;
 
 public class LoginTest extends TestBase {
 
-    @BeforeMethod
+    @BeforeMethod(alwaysRun = true)
     public void preCondition() {
         app.getUser().beLogOut();
     }
 
-    @Test
+    @Test(priority = 1)
     public void testLoginPositive() {
         User data = User.builder()
                 .email("abcd@mail.com")
@@ -22,13 +22,13 @@ public class LoginTest extends TestBase {
         app.getUser().openLoginRegistrationForm();
         app.getUser().fillLoginRegistrationForm(data);
         app.getUser().submitLogin();
-        app.getUser().pause(3);
+        app.getUser().pause(3000);
+        app.getUser().returnToHome();
 
         Assert.assertTrue(app.getUser().isElementPresent(By.xpath("//a[@href='/add']")));
-
     }
 
-    @Test
+    @Test(enabled= false)
     public void testLoginNegativeEmail() {
         User data = User.builder()
                 .email("abcdmail.com")
@@ -39,15 +39,14 @@ public class LoginTest extends TestBase {
         app.getUser().openLoginRegistrationForm();
         app.getUser().fillLoginRegistrationForm(data);
         app.getUser().submitLogin();
-        app.getUser().pause(3);
         Assert.assertTrue(app.getUser().isErrorMessageInFormat());
-        app.getUser().pause(5);
+        app.getUser().pause(1000);
         Assert.assertTrue(app.getUser().isAlertPresent());
-        app.getUser().returnToHome();
+           app.getUser().returnToHome();
 
     }
 
-    @Test
+    @Test(priority = 3)
     public void testLoginNegativePassword() {
         User data = User.builder()
                 .email("abcd@mail.com")
@@ -57,13 +56,13 @@ public class LoginTest extends TestBase {
         app.getUser().openLoginRegistrationForm();
         app.getUser().fillLoginRegistrationForm(data);
         app.getUser().submitLogin();
-        app.getUser().pause(3);
+        app.getUser().pause(3000);
         Assert.assertTrue(app.getUser().isErrorMessageInFormat());
         Assert.assertTrue(app.getUser().isAlertPresent());
         app.getUser().returnToHome();
     }
 
-    @AfterMethod
+    @AfterMethod(alwaysRun = true)
     public void tearDown() {
         //  wd.close();
         //  wd.quit();

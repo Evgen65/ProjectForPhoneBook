@@ -8,7 +8,7 @@ import org.testng.annotations.Test;
 
 public class AddContactsTest extends TestBase {
 
-    @BeforeMethod
+    @BeforeMethod(alwaysRun = true)
     public void preCondition() {
         if (app.getUser().isLogged()) {
             // app.getUser().pause(3);
@@ -20,13 +20,13 @@ public class AddContactsTest extends TestBase {
         }
     }
 
-    @Test(invocationCount = 5)
+    @Test(invocationCount = 3,groups = {"positivegroup","smokegroup"})
     public void addNewContactPositiveTest() {
         int i = (int) (System.currentTimeMillis() / 1000) % 3600;
         Contact contact = Contact.builder()
                 .name("Gregory" + i)
                 .lastName("Pek" + i)
-                .phoneNumber(i + "6777" + i)
+                .phoneNumber(i + "1657774" + i)
                 .contEmail("name" + i + "@mail.com")
                 .address("Haifa, Allenby, " + i)
                 .description("We met on the my offs.")

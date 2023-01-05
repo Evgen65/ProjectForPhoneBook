@@ -8,13 +8,13 @@ import org.testng.annotations.*;
 
 public class RegistrationTest extends TestBase {
 
-    @BeforeMethod
+    @BeforeMethod(alwaysRun = true)
     public void preCondition() {
 
         app.getUser().beLogOut();
     }
 
-    @Test(invocationCount = 1)
+    @Test
     public void testRegistrationPositive() {
         int i = (int) (System.currentTimeMillis() / 1000) % 3600;
         User data = User.builder()
@@ -30,7 +30,6 @@ public class RegistrationTest extends TestBase {
         app.getUser().submitRegistration();
         app.getUser().pause(3000);
         Assert.assertTrue(app.getUser().isElementPresent(By.xpath("//button")));
-
     }
 
     @Test
@@ -49,7 +48,6 @@ public class RegistrationTest extends TestBase {
         Assert.assertTrue(app.getUser().isErrorMessageInFormat());
         Assert.assertTrue(app.getUser().isAlertPresent());
         app.getUser().returnToHome();
-
     }
 
     @Test
@@ -74,7 +72,7 @@ public class RegistrationTest extends TestBase {
     }
 
 
-    @AfterMethod
+    @AfterMethod(alwaysRun = true)
     public void postCondition() {
         //  wd.close();
         //  wd.quit();

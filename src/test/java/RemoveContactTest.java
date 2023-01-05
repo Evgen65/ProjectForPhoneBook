@@ -12,34 +12,38 @@ public class RemoveContactTest extends TestBase {
                     .email("abcd@mail.com")
                     .password("Abcd1234$")
                     .build());
-        }        app.getContact().pause(2500);
+        }
+        app.getContact().pause(2000);
     }
+
     @BeforeMethod
     public void addContactsBeforeRemove() {
-        for(int i=0;i<5;i++) {
+        for (int i = 0; i < 3; i++) {
+            int a = (int) (System.currentTimeMillis() / 1000) % 3600;
+            Contact contact = Contact.builder()
+                    .name("Gregory" + a)
+                    .lastName("Pek" + a)
+                    .phoneNumber(a + "6777" + a)
+                    .contEmail("name" + a + "@mail.com")
+                    .address("Haifa, Allenby, " + a)
+                    .description("We met on the my offs.")
+                    .build();
             app.getContact().openContactForm();
-        int a = (int) (System.currentTimeMillis() / 1000) % 3600;
-        Contact contact = Contact.builder()
-                .name("Gregory" + a)
-                .lastName("Pek" + a)
-                .phoneNumber(a+"6777" + a)
-                .contEmail("name" + a + "@mail.com")
-                .address("Haifa, Allenby, " + a)
-                .description("We met on the my offs.")
-                .build();
-
-                app.getContact().fillContactForm(contact);
-                app.getContact().submitContactForm();
-                app.getContact().pause(1000);
-            }
+            app.getContact().fillContactForm(contact);
+            app.getContact().submitContactForm();
+            app.getContact().pause(1500);
+        }
     }
+
     @Test
     public void removeOneContactPositive() {
         if (app.getContact().countOfContacts() > 0) {
             int result = app.getContact().removeOneContact();
             Assert.assertEquals(result, -1);
+            app.getUser().pause(1500);
         }
     }
+
     @Test
     public void removeAllContactsPositive() {
         if (app.getContact().countOfContacts() > 0) {
