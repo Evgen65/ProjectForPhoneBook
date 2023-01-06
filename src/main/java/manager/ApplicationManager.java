@@ -10,6 +10,8 @@ import org.slf4j.LoggerFactory;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
 
+import java.util.concurrent.TimeUnit;
+
 public class ApplicationManager {
     Logger logger= LoggerFactory.getLogger(ApplicationManager.class);
 
@@ -29,6 +31,7 @@ public class ApplicationManager {
             wd=new EventFiringWebDriver(new ChromeDriver());
             logger.info("Test on CHROME");
         }
+        wd.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         wd.register(new MyListener());
         wd.navigate().to("https://telranedu.web.app/");
         wd.manage().window().maximize();

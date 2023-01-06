@@ -1,7 +1,13 @@
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
 
 <suite name="smokestests" verbose="1" >
-    <test name="smoke" >
+    <groups>
+            <run>
+                    <include name="smokegroup"/>
+            </run>
+    </groups>
+
+    <test name="smoke_test" >
         <classes>
             <class name="LoginTest" />
             <class name="RegistrationTest" />

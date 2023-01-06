@@ -11,6 +11,7 @@
     <test name="positive_test">
         <classes>
             <class name="RegistrationTest"/>
+            <class name="AddContactsTest"/>
         </classes>
     </test>
 </suite>
