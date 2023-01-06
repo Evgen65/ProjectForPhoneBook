@@ -3,7 +3,8 @@
 <suite name="tests" verbose="1">
     <test name="regress">
         <classes>
-            <class name="LoginTest"/>
+            <class name="AddContactsTest"/>
+            <class name="RemoveContactTest"/>
         </classes>
     </test>
 </suite>

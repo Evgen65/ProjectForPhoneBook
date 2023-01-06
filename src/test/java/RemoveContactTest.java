@@ -5,7 +5,7 @@ import org.testng.Assert;
 import org.testng.annotations.*;
 
 public class RemoveContactTest extends TestBase {
-    @BeforeClass
+    @BeforeClass(alwaysRun = true)
     public void preCondition() {
         if (!app.getUser().isLogged()) {
             app.getUser().login(User.builder()
@@ -16,7 +16,7 @@ public class RemoveContactTest extends TestBase {
         app.getContact().pause(2000);
     }
 
-    @BeforeMethod
+    @BeforeMethod(alwaysRun = true)
     public void addContactsBeforeRemove() {
         for (int i = 0; i < 3; i++) {
             int a = (int) (System.currentTimeMillis() / 1000) % 3600;
@@ -35,7 +35,7 @@ public class RemoveContactTest extends TestBase {
         }
     }
 
-    @Test
+    @Test(groups = {"positivegroup", "smokegroup"})
     public void removeOneContactPositive() {
         if (app.getContact().countOfContacts() > 0) {
             int result = app.getContact().removeOneContact();
@@ -44,7 +44,7 @@ public class RemoveContactTest extends TestBase {
         }
     }
 
-    @Test
+    @Test(groups = {"positivegroup", "smokegroup"})
     public void removeAllContactsPositive() {
         if (app.getContact().countOfContacts() > 0) {
             app.getContact().removeAllContacts();

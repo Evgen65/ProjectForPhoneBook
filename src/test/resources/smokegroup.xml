@@ -11,7 +11,7 @@
     <test name="smoke_test" >
         <classes>
             <class name="AddContactsTest" />
-            <class name="RegistrationTest" />
+            <class name="RemoveContactTest" />
         </classes>
     </test>
 </suite>
