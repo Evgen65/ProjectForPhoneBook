@@ -1,4 +1,6 @@
+import manager.DataProviderAddContact;
 import manager.NGListener;
+import manager.ProviderData;
 import models.User;
 import org.openqa.selenium.By;
 import org.testng.Assert;
@@ -14,16 +16,35 @@ public class RegistrationTest extends TestBase {
         app.getUser().beLogOut();
     }
 
-    @Test
+    @Test(invocationCount = 2)
     public void testRegistrationPositive() {
         int i = (int) (System.currentTimeMillis() / 1000) % 3600;
         User data = User.builder()
-                .email(+i+"@mail.com")
-                .password("Abcd" +i+"$")
+                .email(+i + "@mail.com")
+                .password("Abcd" + i + "$")
                 .build();
+        //   logger.info("registrationPositiveTest with email: " + data.getEmail() + " pasword: " + data.getPassword());
+        app.getUser().openLoginRegistrationForm();
+        // app.getUser().fillLoginRegistrationForm("name" + i + "mail.com", "Abcd1234$");
+        app.getUser().fillLoginRegistrationForm(data);
+        app.getUser().submitRegistration();
+        app.getUser().pause(3000);
+        Assert.assertTrue(app.getUser().isElementPresent(By.xpath("//button")));
+    }
 
-     //   logger.info("registrationPositiveTest with email: " + data.getEmail() + " pasword: " + data.getPassword());
-
+    @Test(invocationCount = 1, groups = {"positivegroup", "smokegroup"}, dataProvider = "registrationDto", dataProviderClass = ProviderData.class)
+    public void testRegistrationPositiveDataProvider(User data) {
+        logger.info("registrationPositiveTest with email: " + data.getEmail() + " pasword: " + data.getPassword());
+        app.getUser().openLoginRegistrationForm();
+        // app.getUser().fillLoginRegistrationForm("name" + i + "mail.com", "Abcd1234$");
+        app.getUser().fillLoginRegistrationForm(data);
+        app.getUser().submitRegistration();
+        app.getUser().pause(3000);
+        Assert.assertTrue(app.getUser().isElementPresent(By.xpath("//button")));
+    }
+    @Test(invocationCount = 1, groups = {"positivegroup", "smokegroup"}, dataProvider = "myDPFile", dataProviderClass = ProviderData.class)
+    public void testRegistrationPositiveDataProviderFile(User data) {
+        logger.info("registrationPositiveTest with email: " + data.getEmail() + " pasword: " + data.getPassword());
         app.getUser().openLoginRegistrationForm();
         // app.getUser().fillLoginRegistrationForm("name" + i + "mail.com", "Abcd1234$");
         app.getUser().fillLoginRegistrationForm(data);
@@ -36,7 +57,7 @@ public class RegistrationTest extends TestBase {
     public void registrationWrongEmail() {
         int i = (int) (System.currentTimeMillis() / 1000) % 3600;
         User data = User.builder()
-                .email("name" + 1+"mail.com")
+                .email("name" + 1 + "mail.com")
                 .password("Abcd1234$")
                 .build();
 
@@ -58,7 +79,7 @@ public class RegistrationTest extends TestBase {
                 .password("Abcd1234")
                 .build();
 
-     //   logger.info("registrationNegativeTest with email: " + data.getEmail() + " pasword: " + data.getPassword());
+        //   logger.info("registrationNegativeTest with email: " + data.getEmail() + " pasword: " + data.getPassword());
 
         app.getUser().openLoginRegistrationForm();
         app.getUser().fillLoginRegistrationForm(data);

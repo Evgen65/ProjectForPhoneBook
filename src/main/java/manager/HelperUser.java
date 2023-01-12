@@ -32,7 +32,7 @@ public class HelperUser extends HelperBase {
 
     public void logout() {
 
-        click(By.xpath("//button[text='Sign Out']"));
+        click(By.xpath("//button[.='Sign Out']"));
     }
 
     public void openLoginRegistrationForm() {

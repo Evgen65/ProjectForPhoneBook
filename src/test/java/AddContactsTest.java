@@ -1,3 +1,4 @@
+import manager.DataProviderAddContact;
 import models.Contact;
 import org.openqa.selenium.By;
 import org.testng.Assert;
@@ -20,17 +21,8 @@ public class AddContactsTest extends TestBase {
         }
     }
 
-    @Test(invocationCount = 3,groups = {"positivegroup","smokegroup"})
-    public void addNewContactPositiveTest() {
-        int i = (int) (System.currentTimeMillis() / 1000) % 3600;
-        Contact contact = Contact.builder()
-                .name("Gregory" + i)
-                .lastName("Pek" + i)
-                .phoneNumber(i + "1657774" + i)
-                .contEmail("name" + i + "@mail.com")
-                .address("Haifa, Allenby, " + i)
-                .description("We met on the my offs.")
-                .build();
+    @Test(invocationCount = 1, groups = {"positivegroup", "smokegroup"}, dataProvider = "addContactDto", dataProviderClass = DataProviderAddContact.class)
+    public void addNewContactPositiveTest(Contact contact) {
         logger.info("AddContactTestPositive  with Name: " + contact.getName()
                 + " Last Name: " + contact.getLastName() + " Phone Number :"
                 + contact.getPhoneNumber() +
@@ -46,20 +38,41 @@ public class AddContactsTest extends TestBase {
         app.getContact().pause(2000);
         int countAfter = app.getContact().countOfContacts();
         logger.info("Number of contacts after is " + countAfter);
+        Assert.assertTrue(
+                app.getUser().getText(By.xpath("" +
+                        "//div[contains(@class,'contact-page_leftdiv__yhyke')]")).contains(contact.getPhoneNumber())
+        );
 
+    }
+    @Test(invocationCount = 1, groups = {"positivegroup", "smokegroup"}, dataProvider = "myDPFile", dataProviderClass = DataProviderAddContact.class)
+    public void addNewContactPositiveTestFile(Contact contact) {
+        logger.info("AddContactTestPositive  with Name: " + contact.getName()
+                + " Last Name: " + contact.getLastName() + " Phone Number :"
+                + contact.getPhoneNumber() +
+                " Contact Email : " + contact
+                .getContEmail() + " Address : " + contact.getAddress() + " Description : " + contact.getDescription());
+        app.getContact().countOfContacts();
+        int countBefore = app.getContact().countOfContacts();
+        logger.info("Number of contacts before is " + countBefore);
+        app.getContact().openContactForm();
+        app.getContact().fillContactForm(contact);
+        app.getContact().pause(1000);
+        app.getContact().submitContactForm();
+        app.getContact().pause(2000);
+        int countAfter = app.getContact().countOfContacts();
+        logger.info("Number of contacts after is " + countAfter);
         Assert.assertTrue(
                 app.getUser().getText(By.xpath("" +
                         "//div[contains(@class,'contact-page_leftdiv__yhyke')]")).contains(contact.getPhoneNumber())
         );
     }
-
     @Test
     public void AddContactTestNegativeEmail() {
         int i = (int) (System.currentTimeMillis() / 1000) % 360;
         Contact contact = Contact.builder()
                 .name("Tyron" + i)
                 .lastName("Lancaster" + i)
-                .phoneNumber(i+"15117" + i)
+                .phoneNumber(i + "15117" + i)
                 .contEmail("name" + i + "mail.com")
                 .address("Royal Street  Haifa" + i)
                 .description("We met on vacation a couple of years ago.")
